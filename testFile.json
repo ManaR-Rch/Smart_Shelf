@@ -1,0 +1,90 @@
+{
+  "auth": {
+      "register": {
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "password": "securepassword"
+      },
+      "login": {
+          "email": "john.doe@example.com",
+          "password": "securepassword"
+      },
+      "logout": {},
+      "user": {}
+  },
+
+  "rayons": {
+      "create": {
+          "name": "Fruits et Légumes",
+          "description": "Rayon de produits frais"
+      },
+      "update": {
+          "name": "Produits Laitiers",
+          "description": "Rayon de produits laitiers"
+      },
+      "delete": {},
+      "products": {},
+      "popular_products": {},
+      "promotion_products": {}
+  },
+
+  "categories": {
+      "create": {
+          "name": "Fruits"
+      },
+      "update": {
+          "name": "Légumes"
+      },
+      "delete": {},
+      "products": {}
+  },
+
+  "produits": {
+      "create": {
+          "name": "Pomme",
+          "description": "Fruit frais et délicieux",
+          "price": 1.20,
+          "quantity": 100,
+          "rayon_id": 1,
+          "category": "Fruits",
+          "is_promoted": true,
+          "popularity": 90
+      },
+      "update": {
+          "name": "Pomme Golden",
+          "description": "Pomme jaune sucrée",
+          "price": 1.30,
+          "quantity": 80,
+          "is_promoted": false,
+          "popularity": 85
+      },
+      "delete": {},
+      "search": {
+          "query": "pomme"
+      },
+      "low_stock": {},
+      "update_stock": {
+          "quantity": 50
+      }
+  },
+
+  "ventes": {
+      "create": {
+          "user_id": 1,
+          "product_id": 101,
+          "quantity": 5
+      },
+      "process": {
+          "payment_method": "card",
+          "amount": 6.00
+      },
+      "stats": {}
+  },
+
+  "notifications": {
+      "list": {},
+      "unread": {},
+      "mark_as_read": {},
+      "mark_all_as_read": {}
+  }
+}
