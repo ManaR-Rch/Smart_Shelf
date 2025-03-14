@@ -57,6 +57,6 @@ class RayonController extends Controller
         }
 
         $rayon->delete();
-        return response()->json(['message' => 'Ray removed']);
+        return response()->json(['messge' => 'Ray removed']);
     }
 }
