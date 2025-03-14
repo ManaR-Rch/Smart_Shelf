@@ -106,7 +106,7 @@ class ProductController extends Controller
         $lowThresholdProducts = Product::where('quantity', '<=', 10)->get(['id', 'name', 'quantity']);
 
         if($lowThresholdProducts){
-            return response()->json(['message' => 'ATTENTION: These products needs restocking.', $lowThresholdProducts]);
+            return response()->json(['message' => 'ATTENTION: These producs needs restocking.', $lowThresholdProducts]);
         }
         
     }
