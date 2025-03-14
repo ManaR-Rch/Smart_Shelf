@@ -47,6 +47,6 @@ class NotificationController extends Controller
             ->where('is_read', false)
             ->update(['is_read' => true]);
             
-        return response()->json(['message' => 'Toutes les notificions ont été marquées comme lues']);
+        return response()->json(['message' => 'Toutes les notifications ont été marquées comme lues']);
     }
 }
