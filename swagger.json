@@ -1,0 +1,619 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel API Documentation",
+        "description": "Documentation de l'API Laravel pour la gestion des produits, rayons, ventes, et utilisateurs.",
+        "contact": {
+            "email": "support@magana.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://my-default-host.com",
+            "description": "Serveur API principal"
+        }
+    ],
+    "paths": {
+        "/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Enregistrer un nouvel utilisateur",
+                "operationId": "0903f2e0df1a8857bee538fc055417f0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "enum": [
+                                            "client",
+                                            "admin"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur enregistré avec succès"
+                    },
+                    "400": {
+                        "description": "Erreur de validation"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Connexion de l'utilisateur",
+                "operationId": "2dd578ff7aba2721293dac66833b27d1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "enum": [
+                                            "client",
+                                            "admin"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Connexion réussie"
+                    },
+                    "401": {
+                        "description": "Identifiants incorrects"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Déconnexion de l'utilisateur",
+                "operationId": "68a6108af04af5e3bc1ea68a6c6f1299",
+                "responses": {
+                    "200": {
+                        "description": "Déconnexion réussie"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Liste de tous les produits",
+                "operationId": "c1ff6f862214e1896c59cfe0491ce0e8",
+                "responses": {
+                    "200": {
+                        "description": "Liste des produits"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Ajouter un nouveau produit",
+                "operationId": "399770d33fa4672f1216707d0e236763",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "quantity": {
+                                        "type": "integer"
+                                    },
+                                    "rayon_id": {
+                                        "type": "integer"
+                                    },
+                                    "category": {
+                                        "type": "string"
+                                    },
+                                    "is_promoted": {
+                                        "type": "boolean"
+                                    },
+                                    "popularity": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produit créé avec succès"
+                    },
+                    "400": {
+                        "description": "Erreur de validation"
+                    }
+                }
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Obtenir les détails d'un produit",
+                "operationId": "b46f4aa73232d0368eee698a082342a4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du produit",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails du produit"
+                    },
+                    "404": {
+                        "description": "Produit non trouvé"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Mettre à jour un produit",
+                "operationId": "1419d479f9340e30e67fe21a2ca525b7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du produit",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "quantity": {
+                                        "type": "integer"
+                                    },
+                                    "rayon_id": {
+                                        "type": "integer"
+                                    },
+                                    "category": {
+                                        "type": "string"
+                                    },
+                                    "is_promoted": {
+                                        "type": "boolean"
+                                    },
+                                    "popularity": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produit mis à jour"
+                    },
+                    "404": {
+                        "description": "Produit non trouvé"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Supprimer un produit",
+                "operationId": "fe34b364a3f192305598b65d04d06b5d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du produit",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produit supprimé"
+                    },
+                    "404": {
+                        "description": "Produit non trouvé"
+                    }
+                }
+            }
+        },
+        "/products/search": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Rechercher des produits",
+                "operationId": "cb3d19d3bdb960a76a8948819ab5fe55",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "Terme de recherche",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Résultats de la recherche"
+                    }
+                }
+            }
+        },
+        "/rayons/{rayonId}/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Obtenir les produits d'un rayon",
+                "operationId": "0ae9d8f5ea66a6e24197bfa63fa6685a",
+                "parameters": [
+                    {
+                        "name": "rayonId",
+                        "in": "path",
+                        "description": "ID du rayon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produits du rayon"
+                    },
+                    "404": {
+                        "description": "Rayon non trouvé"
+                    }
+                }
+            }
+        },
+        "/products/alert": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Alerte sur les stocks bas",
+                "operationId": "b4357cc8f11641db4e6d1902a4da9e62",
+                "responses": {
+                    "200": {
+                        "description": "Liste des produits nécessitant un réapprovisionnement"
+                    }
+                }
+            }
+        },
+        "/rayons": {
+            "get": {
+                "tags": [
+                    "Rayons"
+                ],
+                "summary": "Liste de tous les rayons",
+                "operationId": "799b3cf401d12ebda50b057a55822dac",
+                "responses": {
+                    "200": {
+                        "description": "Liste des rayons"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Rayons"
+                ],
+                "summary": "Ajouter un nouveau rayon",
+                "operationId": "383e200fefeffacc6fb1a0e08b888915",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Rayon créé avec succès"
+                    },
+                    "400": {
+                        "description": "Erreur de validation"
+                    }
+                }
+            }
+        },
+        "/rayons/{id}": {
+            "get": {
+                "tags": [
+                    "Rayons"
+                ],
+                "summary": "Obtenir les détails d'un rayon",
+                "operationId": "cb1d594518eba992e5cd75d337ca5419",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du rayon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails du rayon"
+                    },
+                    "404": {
+                        "description": "Rayon non trouvé"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Rayons"
+                ],
+                "summary": "Mettre à jour un rayon",
+                "operationId": "83b25c2a0ead6da0bcc0376a008914fa",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du rayon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Rayon mis à jour"
+                    },
+                    "404": {
+                        "description": "Rayon non trouvé"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Rayons"
+                ],
+                "summary": "Supprimer un rayon",
+                "operationId": "1a23151c95ca23b64a6632034b06f023",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du rayon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Rayon supprimé"
+                    },
+                    "404": {
+                        "description": "Rayon non trouvé"
+                    }
+                }
+            }
+        },
+        "/ventes/stats": {
+            "get": {
+                "tags": [
+                    "Ventes"
+                ],
+                "summary": "Obtenir les statistiques de vente",
+                "operationId": "402114a5eb54710b31286626ed2f2b18",
+                "responses": {
+                    "200": {
+                        "description": "Statistiques de vente récupérées avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "most_sold_products": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "product_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "total_sold": {
+                                                        "type": "integer"
+                                                    },
+                                                    "product": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "quantity": {
+                                                                "type": "integer"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "critical_stock_products": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "quantity": {
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Products",
+            "description": "Products"
+        },
+        {
+            "name": "Rayons",
+            "description": "Rayons"
+        },
+        {
+            "name": "Ventes",
+            "description": "Ventes"
+        }
+    ],
+    "security": [
+        {
+            "sanctum": []
+        }
+    ]
+}
